@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image with Face Overlay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .image-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        #imageContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #uploadedImage {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #faceOverlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: auto;
+            display: none;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image with Face Overlay</h1>
+        <input type="file" id="fileInput" accept="image/*">
+        <div class="image-wrapper">
+            <div id="imageContainer">
+                <img id="uploadedImage" src="" alt="Uploaded Image">
+                <img id="faceOverlay" src="https://cdn.discordapp.com/attachments/1137810641877479526/1281646287598522529/image.png?ex=66dc799e&is=66db281e&hm=7daec3187731cb61adbc96e8ea5244ec6fe7380f2b61a8f622fa0eea1c459b05&" alt="Face Overlay">
+            </div>
+            <button id="toggleFace">Toggle Face</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const uploadedImage = document.getElementById('uploadedImage');
+                    uploadedImage.src = e.target.result;
+                    uploadedImage.style.display = 'block'; // Ensure the image is visible
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('toggleFace').addEventListener('click', function() {
+            const faceOverlay = document.getElementById('faceOverlay');
+            faceOverlay.style.display = faceOverlay.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
